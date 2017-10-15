@@ -326,9 +326,9 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 							(serverResult ? new Date().getTime() - serverResult.getTime() : 0) - serverSync[1];
 					}
 					if (inst._since) { // Apply difference
-						inst._since.setMilliseconds(inst._since.getMilliseconds() + serverSync[2]);
+						inst._since = new Date(inst._since.valueOf() + serverSync[2]);	
 					}
-					inst._until.setMilliseconds(inst._until.getMilliseconds() + serverSync[2]);
+					inst._until = new Date(inst._until.valueOf() + serverSync[2]);	
 				}
 			});
 			for (var i = 0; i < self._serverSyncs.length; i++) { // Update sync details
@@ -498,12 +498,12 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 				if (!this._eqNull(inst._since)) {
 					inst._since = this.UTCDate(timezone, this._determineTime(inst._since, null));
 					if (inst._since && serverOffset) {
-						inst._since.setMilliseconds(inst._since.getMilliseconds() + serverOffset);
+						inst._since = new Date(inst._since.valueOf() + serverOffset);
 					}
 				}
 				inst._until = this.UTCDate(timezone, this._determineTime(inst.options.until, now));
 				if (serverOffset) {
-					inst._until.setMilliseconds(inst._until.getMilliseconds() + serverOffset);
+					inst._until = new Date(inst._until.valueOf() + serverOffset);					
 				}
 			}
 			inst._show = this._determineShow(inst);
